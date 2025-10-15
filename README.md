@@ -26,6 +26,10 @@ O projeto está disponível em produção via [Vercel](https://gerenciador-de-ta
 - Font Awesome
 - Vercel (deploy)
 
+## 🔮 Melhorias Futuras
+
+- Adaptação completa para dispositivos móveis (responsividade)
+
 ## 📦 Instalação local
 
 ```bash
