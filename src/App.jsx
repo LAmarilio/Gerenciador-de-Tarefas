@@ -7,7 +7,9 @@ import FilterTask from "./components/FilterTask"
 const initialStateForm = {
   titleTask: "",
   descriptionTask: "",
-  stateTask: "Pendente"
+  stateTask: "Pendente",
+  createdAt: "",
+  finishedAt: ""
 }
 
 export default function App() {
@@ -32,12 +34,18 @@ export default function App() {
 
   const addTask = (taskData) => {
     if (taskData.id) {
-      const updateTasks = tasks.map(task => task.id === taskData.id ? taskData : task)
+      const updateTasks = tasks.map(task =>
+        task.id === taskData.id ? { ...task, ...taskData } : task
+      );
       setTasks(updateTasks)
     } else {
       const newTask = {
         id: Date.now(),
-        ...taskData
+        ...taskData,
+        createdAt: new Date().toISOString()
+      }
+      if (newTask.stateTask === "Finalizado") {
+        newTask.finishedAt = newTask.createdAt
       }
       setTasks([...tasks, newTask])
     }
@@ -62,7 +70,7 @@ export default function App() {
 
   const changeToFinishStateTask = (id) => {
     const updatedTasks = tasks.map(task =>
-      task.id === id ? { ...task, stateTask: "Finalizado" } : task
+      task.id === id ? { ...task, stateTask: "Finalizado", finishedAt: new Date().toISOString() } : task
     );
     setTasks(updatedTasks);
   };

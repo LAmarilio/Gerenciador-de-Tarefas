@@ -14,13 +14,33 @@ export default function TaskList({ tasks, deleteTask, editTask, changeToFinishSt
             <div className="card-body d-flex flex-column">
               <h5 className="card-title">{task.titleTask}</h5>
               <p className="card-text">{task.descriptionTask}</p>
-              <span className={`badge mb-2 ${task.stateTask === "Finalizado" ? "bg-success" : "bg-warning text-dark"}`} style={{width: "25%"}}>
+              <p className="card-text">
+                <strong>Criada em: </strong>{new Date(task.createdAt).toLocaleDateString("pt-BR", {
+                  day: "2-digit",
+                  month: "long",
+                  year: "numeric",
+                  hour: "2-digit",
+                  minute: "2-digit"
+                })}
+              </p>
+              {task.finishedAt && (
+                <p className="card-text">
+                  <strong>Finalizada em: </strong>{new Date(task.finishedAt).toLocaleString("pt-BR", {
+                    day: "2-digit",
+                    month: "long",
+                    year: "numeric",
+                    hour: "2-digit",
+                    minute: "2-digit"
+                  })}
+                </p>
+              )}
+              <span className={`badge mb-2 ${task.stateTask === "Finalizado" ? "bg-success" : "bg-warning text-dark"}`} style={{ width: "25%" }}>
                 {task.stateTask}
               </span>
               <div className="mt-auto align-self-end">
-                <TaskFinish onFinish={() => changeToFinishStateTask(task.id)}/>
-                <TaskEdit onEdit={() => editTask(task.id)}/>
-                <TaskDelete onDelete={() => deleteTask(task.id)}/>
+                <TaskFinish onFinish={() => changeToFinishStateTask(task.id)} />
+                <TaskEdit onEdit={() => editTask(task.id)} />
+                <TaskDelete onDelete={() => deleteTask(task.id)} />
               </div>
             </div>
           </div>
