@@ -34,6 +34,7 @@ export default function App() {
 
   const addTask = (taskData) => {
     if (taskData.id) {
+      if (taskData.stateTask === "Finalizado") { taskData.finishedAt = new Date().toISOString() }
       const updateTasks = tasks.map(task =>
         task.id === taskData.id ? { ...task, ...taskData } : task
       );
